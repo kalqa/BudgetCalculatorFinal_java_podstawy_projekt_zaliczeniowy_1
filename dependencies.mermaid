@@ -1,0 +1,36 @@
+graph TD
+    SmartBudgetAnalyzer --> ConsoleView
+    SmartBudgetAnalyzer --> UserInput
+    SmartBudgetAnalyzer --> BudgetMath
+    SmartBudgetAnalyzer --> MonthlyReport
+    SmartBudgetAnalyzer --> ParetoAnalysis
+    SmartBudgetAnalyzer --> SavingsGoal
+
+    UserInput --> ConsoleView
+    UserInput --> ConsoleInput
+    UserInput --> BudgetRules
+
+    ConsoleView --> ConsoleInput
+
+    MonthlyReport --> BudgetMath
+    MonthlyReport --> BudgetRules
+
+    ParetoAnalysis --> BudgetMath
+    ParetoAnalysis --> BudgetRules
+    ParetoAnalysis --> ConsoleInput
+    ParetoAnalysis --> MonthlyReport
+
+    SavingsGoal --> BudgetMath
+    SavingsGoal --> BudgetRules
+    SavingsGoal --> ConsoleInput
+
+    %% Styling
+    style SmartBudgetAnalyzer fill:#e74c3c,color:#fff
+    style BudgetMath fill:#27ae60,color:#fff
+    style BudgetRules fill:#27ae60,color:#fff
+    style ConsoleInput fill:#16a085,color:#fff
+    style ConsoleView fill:#2980b9,color:#fff
+    style UserInput fill:#2980b9,color:#fff
+    style MonthlyReport fill:#8e44ad,color:#fff
+    style ParetoAnalysis fill:#8e44ad,color:#fff
+    style SavingsGoal fill:#8e44ad,color:#fff
