@@ -2,7 +2,7 @@ package pl.javaready.projects;
 
 public class BankAccount {
 
-    public static String ownerName;
-    public static int accountState;
-    public static int ownerAge;
+    public String ownerName;
+    public int accountState;
+    public int ownerAge;
 }
