@@ -5,9 +5,10 @@ public class BankingSystem {
         BankAccount bankAccount1 = new BankAccount("bartek", 1000, 25);
         BankAccount bankAccount2 = new BankAccount("andrzej", 2000, 26);
         BankAccount bankAccount3 = new BankAccount("krzysztof", 3000, 27);
-        BankAccount[] bankAccounts = {bankAccount1, bankAccount2, bankAccount3};
+        BankAccount bankAccount4 = new BankAccount("ola", 4000, 28);
+        BankAccount[] bankAccounts = {bankAccount1, bankAccount2, bankAccount3, bankAccount4};
         for (BankAccount account : bankAccounts) {
-            System.out.println(account.ownerName + ":" + account.accountState + ":" + account.ownerAge);
+            account.showDetails(":");
         }
     }
 }
