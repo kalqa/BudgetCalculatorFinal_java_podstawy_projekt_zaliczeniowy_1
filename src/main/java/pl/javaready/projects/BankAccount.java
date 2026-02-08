@@ -11,12 +11,4 @@ public class BankAccount {
         this.accountState = accountState;
         this.ownerAge = ownerAge;
     }
-
-    public static void show(String ownerName, int accountState, int ownerAge) {
-        System.out.println(ownerName + ":" + accountState + ":" + ownerAge);
-    }
-
-    public void show() {
-        System.out.println(this.ownerName + ":" + this.accountState + ":" + this.ownerAge);
-    }
 }
