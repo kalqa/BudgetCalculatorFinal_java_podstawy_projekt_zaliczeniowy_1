@@ -7,7 +7,9 @@ public class BankingSystem {
         BankAccount bankAccount3 = new BankAccount("krzysztof", 3000, 27);
         BankAccount[] bankAccounts = {bankAccount1, bankAccount2, bankAccount3};
         for (BankAccount account : bankAccounts) {
-            System.out.println(account.ownerName + ":" + account.accountState + ":" + account.ownerAge);
+            account.show();
+            BankAccount.show(account.ownerName, account.accountState, account.ownerAge);
+//            System.out.println(account.ownerName + ":" + account.accountState + ":" + account.ownerAge);
         }
     }
 }
