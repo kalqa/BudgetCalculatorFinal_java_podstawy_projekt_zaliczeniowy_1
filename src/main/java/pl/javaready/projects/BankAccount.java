@@ -12,8 +12,15 @@ public class BankAccount {
         this.ownerAge = ownerAge;
     }
 
-    public void showDetails(String separator) {
-        System.out.println(this.ownerName + separator + this.accountState + separator + this.ownerAge);
+//    public void showDetails(String separator) {
+//        System.out.println(this.ownerName + separator + this.accountState + separator + this.ownerAge);
+//    }
+
+    public static void showDetails(String separator,
+                                   String ownerName,
+                                   int accountState,
+                                   int ownerAge) {
+        System.out.println(ownerName + separator + accountState + separator + ownerAge);
     }
 
 }
