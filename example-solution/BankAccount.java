@@ -108,7 +108,7 @@ public class BankAccount {
         return totalAccountsCreated;
     }
 
-    // ===== toString() - nadpisanie metody którą dostajemy od Javy domyslnie (wyświetla adres obiektu w pamięci) =====
+    // ===== toString() - nadpisanie metody z klasy Object =====
 
     @Override
     public String toString() {
