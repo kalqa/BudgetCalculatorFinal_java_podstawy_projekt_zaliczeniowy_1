@@ -16,4 +16,25 @@ public class BankAccount {
         System.out.println("dodaj " + accountState + " zł");
         this.accountState += accountState;
     }
+
+    public void setAccountState(int accountState){
+        if(accountState < 0){
+            System.out.println("nie mozesz ustawić ujemnego stanu konta");
+            return;
+        }
+        this.accountState = accountState;
+    }
+
+    public int getAccountState(){
+        return this.accountState;
+    }
+
+
+
+    public void setOwnerAge(){
+
+    }
+    public void setOwnerName(){
+
+    }
 }

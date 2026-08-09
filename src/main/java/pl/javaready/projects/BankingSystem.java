@@ -3,8 +3,11 @@ package pl.javaready.projects;
 public class BankingSystem {
     public static void main(String[] args) {
         BankAccount bartekAccount = new BankAccount("bartek", 1000, 25);
-        System.out.println(bartekAccount.accountState);
-        bartekAccount.addToAccount(1000);
-        System.out.println(bartekAccount.accountState);
+//        System.out.println(bartekAccount.accountState);
+        System.out.println(bartekAccount.getAccountState());
+//        bartekAccount.addToAccount(1000);
+        bartekAccount.setAccountState(-2000);
+//        bartekAccount.accountState = 2000;
+        System.out.println(bartekAccount.getAccountState());
     }
 }
