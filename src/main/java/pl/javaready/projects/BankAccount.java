@@ -11,8 +11,4 @@ public class BankAccount {
         this.accountState = accountState;
         this.ownerAge = ownerAge;
     }
-
-    public void showDetails(String separator) {
-        System.out.println(this.ownerName + separator + this.accountState + separator + this.ownerAge);
-    }
 }
