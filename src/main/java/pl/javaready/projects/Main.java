@@ -3,16 +3,13 @@ package pl.javaready.projects;
 public class Main {
 
     public static void main(String[] args) {
-        Engine engine = new Engine(150);
-        Car car = new Car("Toyota Corolla", engine);
+        Pizza pizza = new Pizza("L", 3);
+        PizzaOrder order = new PizzaOrder(pizza, 2);
 
-        Engine engine2 = new Engine(350);
-        Car car2 = new Car("Toyota Avensis", engine2);
+        order.placeOrder();
 
-        car.startCar();
-        car2.startCar();
-
-        System.out.println(car);
-        System.out.println(car2);
+        // Porównaj: to dwie linijki. Cała logika liczenia ceny (rozmiar,
+        // dodatki, rabat przy większej ilości) i drukowania paragonu jest
+        // ukryta wewnątrz PizzaOrder - Main nic o niej nie wie.
     }
 }
