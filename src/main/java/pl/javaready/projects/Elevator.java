@@ -3,6 +3,8 @@ package pl.javaready.projects;
 public class Elevator {
 
     private final int MAX_LOAD_KG = 400;
+    private final int MAX_PASSENGERS = 8;
+    private final int DOOR_OPEN_SECONDS = 10;
 
     public Elevator(){
     }
@@ -29,7 +31,23 @@ public class Elevator {
         return currentLoadKg > MAX_LOAD_KG;
     }
 
+    public boolean isFull(int currentPassengers) {
+        return currentPassengers >= MAX_PASSENGERS;
+    }
+
+    public boolean doorsShouldClose(int secondsOpen) {
+        return secondsOpen >= DOOR_OPEN_SECONDS;
+    }
+
     public int getMaxLoadKg() {
         return MAX_LOAD_KG;
+    }
+
+    public int getMaxPassengers() {
+        return MAX_PASSENGERS;
+    }
+
+    public int getDoorOpenSeconds() {
+        return DOOR_OPEN_SECONDS;
     }
 }

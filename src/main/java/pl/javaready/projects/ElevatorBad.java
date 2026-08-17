@@ -23,4 +23,12 @@ public class ElevatorBad {
         // i poprawil TRZY metody powyzej, ale o tej zapomnial
         return currentLoadKg > 350;
     }
+
+    public boolean isFull(int currentPassengers) {
+        return currentPassengers >= 8;
+    }
+
+    public boolean doorsShouldClose(int secondsOpen) {
+        return secondsOpen >= 10;
+    }
 }
