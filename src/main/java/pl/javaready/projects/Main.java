@@ -3,8 +3,8 @@ package pl.javaready.projects;
 public class Main {
 
     public static void main(String[] args) {
-        Elevator passengerElevator = new Elevator(400);
-        Elevator freightElevator = new Elevator(1000);
+        Elevator passengerElevator = new Elevator();
+        Elevator freightElevator = new Elevator();
 
         System.out.println(passengerElevator.describeLoad(320));            // 320/400 kg
         System.out.println(passengerElevator.canBoard(320, 90));            // false - 410 > 400

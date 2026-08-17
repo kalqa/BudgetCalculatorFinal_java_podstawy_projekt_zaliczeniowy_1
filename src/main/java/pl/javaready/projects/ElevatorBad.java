@@ -1,7 +1,5 @@
 package pl.javaready.projects;
 
-// ANTY-WZOR - tak wyglada to w prawdziwym, zaniedbanym kodzie: magic number
-// (400 kg) rozjezdza sie po calej klasie, a jeden z nich jest juz NIESPOJNY.
 public class ElevatorBad {
 
     public boolean canBoard(int currentLoadKg, int personWeightKg) {
