@@ -3,15 +3,17 @@ package pl.javaready.projects;
 public class Main {
 
     public static void main(String[] args) {
-        Mug smallMug = new Mug(250);
-        Mug bigMug = new Mug(400);
+        Elevator passengerElevator = new Elevator(400);
+        Elevator freightElevator = new Elevator(1000);
 
-        System.out.println(smallMug.canFill(200));         // true
-        System.out.println(smallMug.remainingSpace(200));  // 50
+        System.out.println(passengerElevator.describeLoad(320));            // 320/400 kg
+        System.out.println(passengerElevator.canBoard(320, 90));            // false - 410 > 400
+        System.out.println(passengerElevator.remainingCapacity(320));       // 80
 
-        System.out.println(bigMug.canFill(380));            // true
-        System.out.println(bigMug.remainingSpace(380));     // 20
+        System.out.println(freightElevator.describeLoad(600));              // 600/1000 kg
+        System.out.println(freightElevator.canBoard(600, 90));              // true - 690 <= 1000
+        System.out.println(freightElevator.isOverloaded(1050));             // true
 
-        // smallMug.capacityMl = 500; <- to nawet się nie skompiluje
+        // passengerElevator.maxLoadKg = 1000; <- to nawet się nie skompiluje
     }
 }
