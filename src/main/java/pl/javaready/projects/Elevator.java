@@ -2,52 +2,49 @@ package pl.javaready.projects;
 
 public class Elevator {
 
-    private final int MAX_LOAD_KG = 400;
-    private final int MAX_PASSENGERS = 8;
-    private final int DOOR_OPEN_SECONDS = 10;
-
-    public Elevator(){
-    }
+    private final int MAX_CAPACITY = 600;
+    private final int MAX_PERSON = 80;
+    private final int MAX_TIME_OF_SECONDS_TO_CLOSE_THE_DOOR = 10;
 
     public boolean canBoard(int currentLoadKg, int personWeightKg) {
-        return currentLoadKg + personWeightKg <= MAX_LOAD_KG;
+        return currentLoadKg + personWeightKg <= MAX_CAPACITY;
     }
 
     public int remainingCapacity(int currentLoadKg) {
-        return MAX_LOAD_KG - currentLoadKg;
+        return MAX_CAPACITY - currentLoadKg;
     }
 
     public boolean isOverloaded(int currentLoadKg) {
-        return currentLoadKg > MAX_LOAD_KG;
+        return currentLoadKg > MAX_CAPACITY;
     }
 
     public String describeLoad(int currentLoadKg) {
-        return currentLoadKg + "/" + MAX_LOAD_KG + " kg";
+        return currentLoadKg + "/ " + MAX_CAPACITY + " kg";
     }
 
     public boolean isOverloadAlarm(int currentLoadKg) {
-        // liczone ZAWSZE na podstawie MAX_LOAD_KG tej windy,
-        // wiec nigdy nie moze sie "rozjechac" jak w ElevatorBad
-        return currentLoadKg > MAX_LOAD_KG;
+        // ta winda dawno temu miala udzwig 350 kg, ktos zmienil model na 400 kg
+        // i poprawil TRZY metody powyzej, ale o tej zapomnial
+        return currentLoadKg > MAX_CAPACITY;
     }
 
     public boolean isFull(int currentPassengers) {
-        return currentPassengers >= MAX_PASSENGERS;
+        return currentPassengers >= MAX_PERSON;
     }
 
     public boolean doorsShouldClose(int secondsOpen) {
-        return secondsOpen >= DOOR_OPEN_SECONDS;
+        return secondsOpen >= MAX_TIME_OF_SECONDS_TO_CLOSE_THE_DOOR;
     }
 
-    public int getMaxLoadKg() {
-        return MAX_LOAD_KG;
+    public int getMaxCapacity() {
+        return MAX_CAPACITY;
     }
 
-    public int getMaxPassengers() {
-        return MAX_PASSENGERS;
+    public int getMaxPerson() {
+        return MAX_PERSON;
     }
 
-    public int getDoorOpenSeconds() {
-        return DOOR_OPEN_SECONDS;
+    public int getMaxTimeOfSecondsToCloseTheDoor() {
+        return MAX_TIME_OF_SECONDS_TO_CLOSE_THE_DOOR;
     }
 }
