@@ -1,24 +1,23 @@
 package pl.javaready.projects;
 
-import java.util.Scanner;
-
 // TaskConsoleApp ma JEDNA odpowiedzialnosc: dyrygowac ruchem miedzy
-// uzytkownikiem (Scanner), regulami biznesowymi (TaskBoard) i ekranem
+// uzytkownikiem (ConsoleInput), regulami biznesowymi (TaskBoard) i ekranem
 // (TaskPrinter). Sam nie przechowuje zadan i sam nie wypisuje ich na ekran -
 // tylko woła te trzy obiekty we wlasciwej kolejnosci.
 //
 // Wszystkie trzy sa "wstrzykiwane" przez konstruktor - TaskConsoleApp
-// ich nie tworzy, tylko dostaje gotowe z zewnatrz (z Main).
+// ich nie tworzy, tylko dostaje gotowe z zewnatrz (z Main). Zauwaz, ze
+// TaskConsoleApp w ogole nie wie o istnieniu Scannera - zna tylko ConsoleInput.
 public class TaskConsoleApp {
 
     private final TaskBoard board;
     private final TaskPrinter printer;
-    private final Scanner scanner;
+    private final ConsoleInput input;
 
-    public TaskConsoleApp(TaskBoard board, TaskPrinter printer, Scanner scanner) {
+    public TaskConsoleApp(TaskBoard board, TaskPrinter printer, ConsoleInput input) {
         this.board = board;
         this.printer = printer;
-        this.scanner = scanner;
+        this.input = input;
     }
 
     public void run() {
@@ -26,15 +25,15 @@ public class TaskConsoleApp {
 
         while (running) {
             printer.printMenu();
-            String choice = scanner.nextLine();
+            String choice = input.readLine();
 
             if (choice.equals("1")) {
                 System.out.print("Treść zadania: ");
-                board.addTask(scanner.nextLine());
+                board.addTask(input.readLine());
             } else if (choice.equals("2")) {
                 printer.printTasks(board.getTasks(), board.getTasksCount());
                 System.out.print("Numer zadania do odhaczenia: ");
-                int index = Integer.parseInt(scanner.nextLine()) - 1;
+                int index = input.readNumber() - 1;
                 board.completeTask(index);
             } else if (choice.equals("3")) {
                 printer.printTasks(board.getTasks(), board.getTasksCount());
@@ -46,6 +45,6 @@ public class TaskConsoleApp {
             }
         }
 
-        scanner.close();
+        input.close();
     }
 }
