@@ -7,9 +7,11 @@ public class Main {
         System.out.println();
         zagadka2_dwaTakieSameObiekty();
         System.out.println();
+        zagadka3_skadMaUserTeMetody();
+        System.out.println();
         mapaTypow();
         System.out.println();
-        zagadka3_stringITablica();
+        zagadka4_stringITablica();
         System.out.println();
         moral();
     }
@@ -45,6 +47,27 @@ public class Main {
         // Dlaczego Java i tak mowi, ze to NIE to samo?
     }
 
+    // ─── ZAGADKA 3: skad User ma equals/hashCode/toString, skoro ich nie napisalismy? ───
+    private static void zagadka3_skadMaUserTeMetody() {
+        System.out.println("## Zagadka 3: skad User ma equals/hashCode/toString?");
+
+        User user = new User("Ala");
+
+        System.out.println("user.toString():    " + user.toString());
+        System.out.println("user.hashCode():    " + user.hashCode());
+        System.out.println("user.equals(user):  " + user.equals(user));
+
+        // Pytanie: otworzcie klase User - jest tam tylko pole i konstruktor,
+        // ZERO metod. A mimo to powyzsze 3 linijki dzialaja. Skad Java to
+        // wziela?
+        //
+        // To jedna z najwazniejszych rzeczy z dzisiejszej lekcji: KAZDA
+        // klasa w Javie, bez wyjatku, ma wbudowane fabrycznie trzy metody:
+        // equals(), hashCode() i toString(). Nie musisz ich pisac, zeby
+        // istnialy - dostajesz je "w pakiecie", za darmo. (Szczegoly tego
+        // "skad" - na kolejnych lekcjach.)
+    }
+
     // ─── MAPA: kazdy prymityw ma swojego "obiektowego brata" ────────────────
     private static void mapaTypow() {
         System.out.println("## Mapa: prymityw -> jego klasa opakowujaca (wrapper)");
@@ -58,9 +81,9 @@ public class Main {
         System.out.println("short   -> Short");
     }
 
-    // ─── ZAGADKA 3: a co ze Stringiem i tablica? ─────────────────────────────
-    private static void zagadka3_stringITablica() {
-        System.out.println("## Zagadka 3: a co ze Stringiem i tablica?");
+    // ─── ZAGADKA 4: a co ze Stringiem i tablica? ─────────────────────────────
+    private static void zagadka4_stringITablica() {
+        System.out.println("## Zagadka 4: a co ze Stringiem i tablica?");
 
         String s = "Ala";
         int[] numbers = {1, 2, 3};
