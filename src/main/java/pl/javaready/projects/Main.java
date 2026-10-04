@@ -1,23 +1,15 @@
 package pl.javaready.projects;
 
-// Lekcja: obiekty a prymitywy - skad to sie wzielo i gdzie jest haczyk?
-//
-// Krotki rys historyczny: Java od samego poczatku ma prymitywy (int, boolean,
-// double...) - to "zwykle wartosci". Ale Java jest jezykiem OBIEKTOWYM, wiec
-// dla kazdego prymitywu istnieje tez jego "obiektowy odpowiednik" - klasa
-// opakowujaca (int -> Integer, boolean -> Boolean...). Macie juz za soba
-// klasy, obiekty i prymitywy osobno - dzis zobaczymy, co sie dzieje, gdy
-// trzeba je ze soba pogodzic.
-//
-// Zanim wytlumaczymy DLACZEGO tak sie dzieje (to temat na kolejna lekcje
-// o modelu pamieci), zobaczmy NAJPIERW, jak to potrafi nas zaskoczyc.
-// Przy kazdej zagadce zatrzymajcie sie na pytaniu w komentarzu.
 public class Main {
 
     public static void main(String[] args) {
         zagadka1_intKontraInteger();
         System.out.println();
         zagadka2_dwaTakieSameObiekty();
+        System.out.println();
+        mapaTypow();
+        System.out.println();
+        zagadka3_stringITablica();
         System.out.println();
         moral();
     }
@@ -51,6 +43,42 @@ public class Main {
 
         // Pytanie: oba obiekty maja w srodku dokladnie to samo imie "Ala".
         // Dlaczego Java i tak mowi, ze to NIE to samo?
+    }
+
+    // ─── MAPA: kazdy prymityw ma swojego "obiektowego brata" ────────────────
+    private static void mapaTypow() {
+        System.out.println("## Mapa: prymityw -> jego klasa opakowujaca (wrapper)");
+        System.out.println("int     -> Integer");
+        System.out.println("long    -> Long");
+        System.out.println("double  -> Double");
+        System.out.println("float   -> Float");
+        System.out.println("boolean -> Boolean");
+        System.out.println("char    -> Character");
+        System.out.println("byte    -> Byte");
+        System.out.println("short   -> Short");
+    }
+
+    // ─── ZAGADKA 3: a co ze Stringiem i tablica? ─────────────────────────────
+    private static void zagadka3_stringITablica() {
+        System.out.println("## Zagadka 3: a co ze Stringiem i tablica?");
+
+        String s = "Ala";
+        int[] numbers = {1, 2, 3};
+
+        // Pytanie: w mapie powyzej nie ma Stringa - bo String NIGDY nie byl
+        // prymitywem, od razu byl klasa (obiektem). Tablica tez - mimo ze nie
+        // widac tu slowa "new", kazda tablica w Javie to tez obiekt.
+        System.out.println("s instanceof Object:       " + (s instanceof Object));
+        System.out.println("numbers instanceof Object: " + (numbers instanceof Object));
+        System.out.println("s.getClass():              " + s.getClass());
+        System.out.println("numbers.getClass():        " + numbers.getClass());
+        // ^ "[I" wyglada dziwnie, ale to tylko wewnetrzna nazwa Javy dla
+        // "tablicy intow" - wazne, ze to w ogole JEST jakas klasa (obiekt).
+
+        // Dla porownania: ponizsze NIE skompilowaloby sie, bo "a" to prymityw,
+        // a prymitywy nie maja zadnych metod (nie sa obiektami):
+        // int a = 5;
+        // a.getClass(); // <- BLAD KOMPILACJI
     }
 
     private static void moral() {
