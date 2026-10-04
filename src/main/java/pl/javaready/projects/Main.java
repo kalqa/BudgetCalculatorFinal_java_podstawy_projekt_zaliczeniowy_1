@@ -1,46 +1,81 @@
 package pl.javaready.projects;
 
-// Main pokazuje "na żywo" dokładnie to, co widać w wizualizacji modelu pamięci:
-// - int to prymityw, który żyje wprost na stosie
-// - Integer to KLASA - nawet "Integer priority = 5;" tworzy obiekt na stercie
-// - referencja to tylko adres, kopiowana do konstruktora Task(...)
-// - obiekty porównujemy przez equals(), a nie ==
+// Lekcja: obiekty a prymitywy - skad to sie wzielo i gdzie jest haczyk?
 //
-// Odpal to w debugerze i podglądaj zmienne w IntelliJ (Variables / Evaluate)
-// - zobaczysz dokładnie te same wartości i referencje, co na diagramie.
+// Krotki rys historyczny: Java od samego poczatku ma prymitywy (int, boolean,
+// double...) - to "zwykle wartosci". Ale Java jest jezykiem OBIEKTOWYM, wiec
+// dla kazdego prymitywu istnieje tez jego "obiektowy odpowiednik" - klasa
+// opakowujaca (int -> Integer, boolean -> Boolean...). Macie juz za soba
+// klasy, obiekty i prymitywy osobno - dzis zobaczymy, co sie dzieje, gdy
+// trzeba je ze soba pogodzic.
+//
+// Zanim wytlumaczymy DLACZEGO tak sie dzieje (to temat na kolejna lekcje
+// o modelu pamieci), zobaczmy NAJPIERW, jak to potrafi nas zaskoczyc.
+// Przy kazdej zagadce zatrzymajcie sie na pytaniu w komentarzu.
 public class Main {
 
     public static void main(String[] args) {
-        int id = 1;
-        String title = "Kupić mleko";
+        zagadka1_dwaTakieSameObiekty();
+        System.out.println();
+        zagadka2_intKontraInteger();
+        System.out.println();
+        zagadka3_malaLiczbaKontraDuza();
+        System.out.println();
+        moral();
+    }
 
-        // Integer to klasa - "new Integer(...)" dzieje się w tle (autoboxing)
-        Integer priority = 5;
+    // ─── ZAGADKA 1: dwa obiekty z identycznymi danymi w srodku ──────────────
+    private static void zagadka1_dwaTakieSameObiekty() {
+        System.out.println("## Zagadka 1: User != User?");
 
-        Task task = new Task(id, title, priority);
-        System.out.println(task);
-        System.out.println("Priorytet zadania: " + task.getPriority());
+        User user1 = new User("Ala");
+        User user2 = new User("Ala");
 
-        // ─── PLAC ZABAW: == kontra equals() ─────────────────────────────────
-        // Prymitywy - zawsze ==
-        int a = 5;
-        int b = 5;
-        System.out.println("int a == b: " + (a == b)); // true - to zwykłe porównanie wartości
+        System.out.println("user1 == user2:        " + (user1 == user2));
+        System.out.println("user1.equals(user2):   " + user1.equals(user2));
 
-        // Obiekty - powinniśmy używać equals()
-        Integer x = 200;
-        Integer y = 200;
-        System.out.println("Integer x == y: " + (x == y));         // uwaga: false! (dwa różne obiekty)
-        System.out.println("Integer x.equals(y): " + x.equals(y)); // true - ta sama wartość w środku
+        // Pytanie: oba obiekty maja w srodku dokladnie to samo imie "Ala".
+        // Dlaczego Java i tak mowi, ze to NIE to samo?
+    }
 
-        // Małe Integery (-128..127) Java trzyma w "cache" i podaje ten sam
-        // obiekt, dlatego akurat w tym zakresie == czasem "przez przypadek" zadziała:
-        Integer small1 = 100;
-        Integer small2 = 100;
-        System.out.println("mały Integer 100 == 100: " + (small1 == small2)); // true - pułapka!
+    // ─── ZAGADKA 2: int kontra Integer ───────────────────────────────────────
+    private static void zagadka2_intKontraInteger() {
+        System.out.println("## Zagadka 2: int kontra Integer");
 
-        // null - referencja, która na nic jeszcze nie wskazuje
-        Integer nieustawiony = null;
-        System.out.println("czy nieustawiony == null: " + (nieustawiony == null));
+        int a = 1000;
+        int b = 1000;
+        System.out.println("int:     a == b          -> " + (a == b));
+
+        Integer x = 1000;
+        Integer y = 1000;
+        System.out.println("Integer: x == y          -> " + (x == y));
+        System.out.println("Integer: x.equals(y)     -> " + x.equals(y));
+
+        // Pytanie: to te same liczby, ten sam operator (==), a wyniki sa
+        // inne. Dlaczego int i Integer zachowuja sie tutaj inaczej?
+    }
+
+    // ─── ZAGADKA 3: ta sama zagadka, inne liczby ─────────────────────────────
+    private static void zagadka3_malaLiczbaKontraDuza() {
+        System.out.println("## Zagadka 3: mala liczba kontra duza liczba");
+
+        Integer male1 = 100;
+        Integer male2 = 100;
+        System.out.println("Integer 100 == 100       -> " + (male1 == male2));
+
+        Integer duze1 = 1000;
+        Integer duze2 = 1000;
+        System.out.println("Integer 1000 == 1000     -> " + (duze1 == duze2));
+
+        // Pytanie: ten sam kod, ta sama logika - a wynik zalezy od tego,
+        // JAKA to liczba (male: true, duze: false)?! To NIE jest clue tej
+        // lekcji, to tylko ciekawostka (Java "cache'uje" Integery od -128
+        // do 127). Zapamietajcie wniosek ponizej, nie ten szczegol.
+    }
+
+    private static void moral() {
+        System.out.println("## Zasada, ktora juz teraz mozecie zapamietac:");
+        System.out.println("Dla OBIEKTOW zawsze uzywamy .equals() - nigdy ==.");
+        System.out.println("Dlaczego tak jest - o tym na kolejnej lekcji (model pamieci).");
     }
 }
