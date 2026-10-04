@@ -15,30 +15,16 @@ package pl.javaready.projects;
 public class Main {
 
     public static void main(String[] args) {
-        zagadka1_dwaTakieSameObiekty();
+        zagadka1_intKontraInteger();
         System.out.println();
-        zagadka2_intKontraInteger();
+        zagadka2_dwaTakieSameObiekty();
         System.out.println();
         moral();
     }
 
-    // ─── ZAGADKA 1: dwa obiekty z identycznymi danymi w srodku ──────────────
-    private static void zagadka1_dwaTakieSameObiekty() {
-        System.out.println("## Zagadka 1: User != User?");
-
-        User user1 = new User("Ala");
-        User user2 = new User("Ala");
-
-        System.out.println("user1 == user2:        " + (user1 == user2));
-        System.out.println("user1.equals(user2):   " + user1.equals(user2));
-
-        // Pytanie: oba obiekty maja w srodku dokladnie to samo imie "Ala".
-        // Dlaczego Java i tak mowi, ze to NIE to samo?
-    }
-
-    // ─── ZAGADKA 2: int kontra Integer ───────────────────────────────────────
-    private static void zagadka2_intKontraInteger() {
-        System.out.println("## Zagadka 2: int kontra Integer");
+    // ─── ZAGADKA 1: int kontra Integer ───────────────────────────────────────
+    private static void zagadka1_intKontraInteger() {
+        System.out.println("## Zagadka 1: int kontra Integer");
 
         int a = 1000;
         int b = 1000;
@@ -51,6 +37,20 @@ public class Main {
 
         // Pytanie: to te same liczby, ten sam operator (==), a wyniki sa
         // inne. Dlaczego int i Integer zachowuja sie tutaj inaczej?
+    }
+
+    // ─── ZAGADKA 2: dwa obiekty z identycznymi danymi w srodku ──────────────
+    private static void zagadka2_dwaTakieSameObiekty() {
+        System.out.println("## Zagadka 2: User != User?");
+
+        User user1 = new User("Ala");
+        User user2 = new User("Ala");
+
+        System.out.println("user1 == user2:        " + (user1 == user2));
+        System.out.println("user1.equals(user2):   " + user1.equals(user2));
+
+        // Pytanie: oba obiekty maja w srodku dokladnie to samo imie "Ala".
+        // Dlaczego Java i tak mowi, ze to NIE to samo?
     }
 
     private static void moral() {
