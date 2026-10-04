@@ -19,8 +19,6 @@ public class Main {
         System.out.println();
         zagadka2_intKontraInteger();
         System.out.println();
-        zagadka3_malaLiczbaKontraDuza();
-        System.out.println();
         moral();
     }
 
@@ -53,24 +51,6 @@ public class Main {
 
         // Pytanie: to te same liczby, ten sam operator (==), a wyniki sa
         // inne. Dlaczego int i Integer zachowuja sie tutaj inaczej?
-    }
-
-    // ─── ZAGADKA 3: ta sama zagadka, inne liczby ─────────────────────────────
-    private static void zagadka3_malaLiczbaKontraDuza() {
-        System.out.println("## Zagadka 3: mala liczba kontra duza liczba");
-
-        Integer male1 = 100;
-        Integer male2 = 100;
-        System.out.println("Integer 100 == 100       -> " + (male1 == male2));
-
-        Integer duze1 = 1000;
-        Integer duze2 = 1000;
-        System.out.println("Integer 1000 == 1000     -> " + (duze1 == duze2));
-
-        // Pytanie: ten sam kod, ta sama logika - a wynik zalezy od tego,
-        // JAKA to liczba (male: true, duze: false)?! To NIE jest clue tej
-        // lekcji, to tylko ciekawostka (Java "cache'uje" Integery od -128
-        // do 127). Zapamietajcie wniosek ponizej, nie ten szczegol.
     }
 
     private static void moral() {
