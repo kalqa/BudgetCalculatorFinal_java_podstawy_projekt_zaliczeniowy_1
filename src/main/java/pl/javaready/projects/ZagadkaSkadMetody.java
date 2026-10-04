@@ -5,7 +5,7 @@ public class ZagadkaSkadMetody {
     public static void main(String[] args) {
         System.out.println("## Zagadka 3: skad User ma equals/hashCode/toString?");
 
-        User user = new User("Ala");
+        User user = new User("Ala", 30);
 
         System.out.println("user.toString():    " + user.toString());
         System.out.println("user.hashCode():    " + user.hashCode());
