@@ -6,7 +6,7 @@ public class Main {
         int id = 1;
         String title = "Kupić mleko";
 
-        Integer priority = 5;
+        Integer priority = new Integer(5);
 
         Task task = new Task(id, title, priority);
 

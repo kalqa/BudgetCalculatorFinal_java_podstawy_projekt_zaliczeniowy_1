@@ -3,18 +3,12 @@ package pl.javaready.projects;
 public class DemoWatki {
 
     public static void main(String[] args) {
-        Task wspolny = new Task(1, "Wspólne zadanie", 5);
+        Task wspolny = new Task(1, "Wspólne zadanie", new Integer(5));
 
-        Runnable praca1 = () -> {
-            int lokalna = 100;
-            System.out.println(Thread.currentThread().getName() + ": lokalna=" + lokalna + ", task=" + wspolny);
-        };
-        Runnable praca2 = () -> {
-            int lokalna = 200;
-            System.out.println(Thread.currentThread().getName() + ": lokalna=" + lokalna + ", task=" + wspolny);
-        };
+        WatekZTask watek1 = new WatekZTask("Wątek-1", 100, wspolny);
+        WatekZTask watek2 = new WatekZTask("Wątek-2", 200, wspolny);
 
-        new Thread(praca1, "Wątek-1").start();
-        new Thread(praca2, "Wątek-2").start();
+        watek1.start();
+        watek2.start();
     }
 }
