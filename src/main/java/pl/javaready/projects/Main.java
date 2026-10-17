@@ -18,6 +18,7 @@ public class Main {
     }
 
     private static void showMe(int id, Task task){
+        int a = new Integer(5);
         id = 5;
 //        task.priority = new Integer(1_000_000);
         Task task2 = new Task(2, "siema", 2_000_000);
