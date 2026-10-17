@@ -5,15 +5,7 @@ public class Main {
     public static void main(String[] args) {
         int id = 1;
         String title = "Kupić mleko";
-
         Integer priority = new Integer(5);
-
         Task task = new Task(id, title, priority);
-
-        System.out.println(task);
-
-        priority = null;
-
-        System.out.println(task);
     }
 }
