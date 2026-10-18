@@ -10,7 +10,9 @@
 
 Oryginalny kod siedzi w `src/main/java/pl/javaready/projects/SmartBudgetAnalyzer.java` — przeczytaj go najpierw w całości, zanim zaczniesz dzielić.
 
-Zanim zaczniesz kodować, zobacz `architektura-budget-analyzer.html` — diagram pokazujący, jak docelowe klasy mają się ze sobą łączyć (kto kogo tworzy, kto do kogo woła).
+Zanim zaczniesz kodować, zobacz diagram poniżej — pokazuje, jak docelowe klasy mają się ze sobą łączyć (kto kogo tworzy, kto do kogo woła). Interaktywna wersja (działa też w dark mode) jest w `architektura-budget-analyzer.html`.
+
+![Diagram architektury Budget Analyzer](architektura-budget-analyzer.png)
 
 ## Co ma robić program (bez zmian)
 
