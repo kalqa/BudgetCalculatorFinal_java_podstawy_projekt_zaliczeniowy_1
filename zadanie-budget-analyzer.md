@@ -10,6 +10,8 @@
 
 Oryginalny kod siedzi w `src/main/java/pl/javaready/projects/SmartBudgetAnalyzer.java` — przeczytaj go najpierw w całości, zanim zaczniesz dzielić.
 
+Zanim zaczniesz kodować, zobacz `architektura-budget-analyzer.html` — diagram pokazujący, jak docelowe klasy mają się ze sobą łączyć (kto kogo tworzy, kto do kogo woła).
+
 ## Co ma robić program (bez zmian)
 
 Program konsolowy, który:
@@ -19,12 +21,11 @@ Program konsolowy, który:
 
 Wszystkie reguły liczenia (procenty, "zdrowy poziom" wydatków, które kategorie są "top", plan oszczędnościowy, proponowane cięcia) zostają identyczne co do liczby po przecinku.
 
-## Dwie rzeczy, które WOLNO Ci zmienić (bo to tylko efekt starego stylu, nie logika biznesowa)
+## Jedna rzecz, którą WOLNO Ci zmienić (bo to tylko efekt starego stylu, nie logika biznesowa)
 
-1. **`clearBuffer()` zniknie sam.** Oryginał miesza `scanner.nextInt()`/`nextDouble()` z `scanner.nextLine()`, stąd całe `clearBuffer()`. Jeśli użyjesz `ConsoleInput` (patrz niżej), które czyta wszystko przez `nextLine()` i parsuje, ten problem nie istnieje — nie musisz nic specjalnie odtwarzać.
-2. **Dziwny boczny efekt w "top kategoriach".** W oryginale, jeśli do pokrycia 80% wydatków trzeba więcej niż 3 kategorii, tablica wynikowa ma dziurę, która po drodze wskazuje z powrotem na kategorię #0. To nie jest zamierzone zachowanie, tylko błąd w oryginalnym kodzie — nie odtwarzaj go. Twoja wersja ma po prostu zwrócić maksymalnie 3 top kategorie, bez żadnych duchów.
+**`clearBuffer()` zniknie sam.** Oryginał miesza `scanner.nextInt()`/`nextDouble()` z `scanner.nextLine()`, stąd całe `clearBuffer()`. Jeśli użyjesz `ConsoleInput` (patrz niżej), które czyta wszystko przez `nextLine()` i parsuje, ten problem nie istnieje — nie musisz nic specjalnie odtwarzać.
 
-Poza tymi dwoma punktami: zachowanie identyczne.
+Poza tym punktem: zachowanie identyczne.
 
 ## Wymagane klasy (minimum)
 
@@ -50,7 +51,7 @@ Drobne, jednolinijkowe pytania do użytkownika (np. "Ile to kosztuje?", "tak/nie
 - **Pola `final`, gdzie się da.** Prawie wszystko w tym programie ustawia się raz i się nie zmienia (dokładnie jak kwoty kategorii w oryginale — nikt ich po zebraniu nie modyfikuje). Wyjątek: `budget` i `tracker` w `BudgetConsoleApp` nie mogą być `final`, bo dostają wartość dopiero w `run()`, nie w konstruktorze — i to jest OK, dopóki nadal są `private`.
 - **Konstruktory ustawiają wszystkie pola**, z `this.` tam, gdzie parametr nazywa się tak jak pole.
 - **Gettery tam, gdzie inna klasa faktycznie czyta wartość.** Żadnego gettera "na wszelki wypadek".
-- **Żadnych settersów, które psują reguły.** Skoro w oryginale nic nigdy nie zmienia kwoty kategorii po zebraniu danych — nie dodawaj `setAmount()`, którego nikt nie potrzebuje i który tylko otworzyłby furtkę do bałaganu.
+- **Żadnych setterów, które psują reguły.** Skoro w oryginale nic nigdy nie zmienia kwoty kategorii po zebraniu danych — nie dodawaj `setAmount()`, którego nikt nie potrzebuje i który tylko otworzyłby furtkę do bałaganu.
 - **Metody prywatne vs publiczne.** Każda publiczna metoda, która robi więcej niż 3-4 linijki, powinna wołać prywatne metody pomocnicze (np. `ExpenseTracker.findTopCategories()` publiczne, ale sortowanie i liczenie 80% — prywatne).
 - **Stałe `final` (WIELKIE_LITERY) dla magicznych liczb.** W oryginale jest sporo liczb wklepanych na żywca w kodzie — przynajmniej te muszą dostać nazwę: próg 80% (top kategorie), limit 3 kategorii, 20% (proponowane cięcie), 12 (miesięcy w roku), 0.67 (cel redukcji użycia), 70 i 100 (progi statusu budżetu).
 - **Kompozycja, nie równoległe tablice.** `ExpenseTracker` trzyma `ExpenseCategory[]`, a nie osobną tablicę nazw i osobną tablicę kwot.
