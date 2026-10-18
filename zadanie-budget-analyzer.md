@@ -10,7 +10,97 @@
 
 Oryginalny kod siedzi w `src/main/java/pl/javaready/projects/SmartBudgetAnalyzer.java` — przeczytaj go najpierw w całości, zanim zaczniesz dzielić.
 
-Zanim zaczniesz kodować, zobacz `architektura-budget-analyzer.html` — diagram pokazujący, jak docelowe klasy mają się ze sobą łączyć (kto kogo tworzy, kto do kogo woła).
+## Architektura — jak klasy mają się ze sobą łączyć
+
+Przerywane strzałki to `tworzy`, ciągłe miedziane to `łączy / woła`. `MathUtils` stoi z boku bez strzałek — to narzędzie (`static`), nie "uczestnik rozmowy" jak reszta klas.
+
+<svg viewBox="0 0 820 560" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:820px;height:auto;font-family:ui-sans-serif,sans-serif;background:#f3f5f6;border:1px solid #ccd3d7;border-radius:10px;">
+  <defs>
+    <marker id="archArrowDashed" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#131a1f" opacity="0.7"/>
+    </marker>
+    <marker id="archArrowWire" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#b5651d"/>
+    </marker>
+  </defs>
+
+  <!-- Main -->
+  <rect x="340" y="16" width="140" height="54" rx="8" fill="#e7ebed" stroke="#131a1f" stroke-opacity="0.4"/>
+  <text x="410" y="39" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" font-weight="700" fill="#131a1f">Main</text>
+  <text x="410" y="56" text-anchor="middle" font-size="10" fill="#131a1f" opacity="0.65">tworzy i łączy</text>
+
+  <!-- row2: created by Main -->
+  <g stroke="#131a1f" stroke-opacity="0.55" stroke-width="1.2" stroke-dasharray="3 4" fill="none" marker-end="url(#archArrowDashed)">
+    <line x1="370" y1="70" x2="125" y2="128"/>
+    <line x1="400" y1="70" x2="345" y2="128"/>
+    <line x1="440" y1="70" x2="655" y2="128"/>
+  </g>
+  <text x="410" y="90" text-anchor="middle" font-size="10" fill="#131a1f" opacity="0.6">tworzy 3 obiekty</text>
+
+  <g font-family="ui-monospace,monospace" font-size="12">
+    <rect x="30" y="130" width="190" height="64" rx="8" fill="none" stroke="#131a1f" stroke-opacity="0.45"/>
+    <text x="125" y="154" text-anchor="middle" font-weight="700" fill="#131a1f">ConsoleInput</text>
+    <text x="125" y="170" text-anchor="middle" font-size="9.5" fill="#131a1f" opacity="0.65" font-family="ui-sans-serif,sans-serif">czyta z klawiatury</text>
+
+    <rect x="250" y="130" width="190" height="64" rx="8" fill="none" stroke="#131a1f" stroke-opacity="0.45"/>
+    <text x="345" y="154" text-anchor="middle" font-weight="700" fill="#131a1f">BudgetPrinter</text>
+    <text x="345" y="170" text-anchor="middle" font-size="9.5" fill="#131a1f" opacity="0.65" font-family="ui-sans-serif,sans-serif">wyświetlanie raportów</text>
+
+    <rect x="560" y="130" width="220" height="64" rx="8" fill="#b5651d" fill-opacity="0.1" stroke="#b5651d" stroke-width="1.4"/>
+    <text x="670" y="154" text-anchor="middle" font-weight="700" fill="#b5651d">BudgetConsoleApp</text>
+    <text x="670" y="170" text-anchor="middle" font-size="9.5" fill="#b5651d" opacity="0.9" font-family="ui-sans-serif,sans-serif">steruje przepływem</text>
+  </g>
+
+  <!-- wiring: ConsoleInput / BudgetPrinter -> BudgetConsoleApp -->
+  <g stroke="#b5651d" stroke-width="1.3" opacity="0.8" fill="none" marker-end="url(#archArrowWire)">
+    <path d="M120,194 Q400,250 557,160"/>
+    <path d="M345,194 Q460,232 557,172"/>
+  </g>
+  <text x="500" y="218" text-anchor="middle" font-size="10" fill="#b5651d">wstrzyknięte przez konstruktor</text>
+
+  <!-- row3: created by BudgetConsoleApp w run() -->
+  <g stroke="#131a1f" stroke-opacity="0.55" stroke-width="1.2" stroke-dasharray="3 4" fill="none" marker-end="url(#archArrowDashed)">
+    <line x1="620" y1="194" x2="150" y2="262"/>
+    <line x1="650" y1="194" x2="380" y2="262"/>
+    <line x1="690" y1="194" x2="665" y2="262"/>
+  </g>
+  <text x="670" y="222" text-anchor="middle" font-size="10" fill="#131a1f" opacity="0.6">tworzy w run()</text>
+
+  <g font-family="ui-monospace,monospace" font-size="12">
+    <rect x="30" y="264" width="190" height="64" rx="8" fill="none" stroke="#131a1f" stroke-opacity="0.45"/>
+    <text x="125" y="288" text-anchor="middle" font-weight="700" fill="#131a1f">Budget</text>
+    <text x="125" y="304" text-anchor="middle" font-size="9.5" fill="#131a1f" opacity="0.65" font-family="ui-sans-serif,sans-serif">dochód, koszty, status</text>
+
+    <rect x="250" y="264" width="220" height="64" rx="8" fill="none" stroke="#131a1f" stroke-opacity="0.45"/>
+    <text x="360" y="288" text-anchor="middle" font-weight="700" fill="#131a1f">ExpenseTracker</text>
+    <text x="360" y="304" text-anchor="middle" font-size="9.5" fill="#131a1f" opacity="0.65" font-family="ui-sans-serif,sans-serif">sumy, top kategorie 80/20</text>
+
+    <rect x="560" y="264" width="220" height="64" rx="8" fill="none" stroke="#131a1f" stroke-opacity="0.45"/>
+    <text x="670" y="288" text-anchor="middle" font-weight="700" fill="#131a1f">SavingsGoal</text>
+    <text x="670" y="304" text-anchor="middle" font-size="9.5" fill="#131a1f" opacity="0.65" font-family="ui-sans-serif,sans-serif">jeden cel + wyliczenia</text>
+  </g>
+
+  <!-- ExpenseTracker -> ExpenseCategory (composition) -->
+  <g stroke="#b5651d" stroke-width="1.3" opacity="0.8" fill="none" marker-end="url(#archArrowWire)">
+    <line x1="360" y1="328" x2="360" y2="400"/>
+  </g>
+  <rect x="316" y="356" width="88" height="16" rx="3" fill="#f3f5f6"/>
+  <text x="360" y="368" text-anchor="middle" font-size="10" fill="#b5651d">przechowuje[]</text>
+
+  <!-- ExpenseCategory -->
+  <rect x="250" y="402" width="220" height="64" rx="8" fill="none" stroke="#131a1f" stroke-opacity="0.45"/>
+  <text x="360" y="426" text-anchor="middle" font-family="ui-monospace,monospace" font-size="12" font-weight="700" fill="#131a1f">ExpenseCategory</text>
+  <text x="360" y="442" text-anchor="middle" font-size="9.5" fill="#131a1f" opacity="0.65">nazwa + kwota, equals()</text>
+
+  <!-- MathUtils - off to the side, no arrows -->
+  <rect x="600" y="412" width="180" height="56" rx="8" fill="none" stroke="#131a1f" stroke-opacity="0.35" stroke-dasharray="3 3"/>
+  <text x="690" y="436" text-anchor="middle" font-family="ui-monospace,monospace" font-size="12" font-weight="700" fill="#131a1f" opacity="0.8">MathUtils</text>
+  <text x="690" y="452" text-anchor="middle" font-size="9.5" fill="#131a1f" opacity="0.55">narzędzie (static)</text>
+</svg>
+
+**Main** tworzy trzy obiekty i wstrzykuje **ConsoleInput** oraz **BudgetPrinter** do **BudgetConsoleApp**. Dopiero **BudgetConsoleApp**, w swojej metodzie `run()` (po zebraniu danych od użytkownika), tworzy **Budget**, **ExpenseTracker** i (przy każdym celu) **SavingsGoal**. **ExpenseTracker** przechowuje tablicę **ExpenseCategory** — **BudgetPrinter** dostaje te obiekty jako parametry metod i je formatuje, bez trzymania ich u siebie. **MathUtils** stoi z boku — kilka klas woła jej statyczne metody, ale to nie jest obiekt, z którym się "rozmawia" jak z resztą.
+
+*(Ta sama grafika, w wersji z obsługą dark mode, jest też w `architektura-budget-analyzer.html`.)*
 
 ## Co ma robić program (bez zmian)
 
