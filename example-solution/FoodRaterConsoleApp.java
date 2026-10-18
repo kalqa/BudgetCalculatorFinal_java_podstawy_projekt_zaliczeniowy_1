@@ -15,6 +15,38 @@ public class FoodRaterConsoleApp {
         this.input = input;
         this.printer = printer;
         this.book = new RatingBook();
+        this.seedExampleData();
+    }
+
+    // Dane startowe, zeby po uruchomieniu programu od razu bylo cos
+    // do pokazania w rankingu - w tym dwa dania ocenione dwa razy,
+    // zeby od razu bylo widac grupowanie przez equals().
+    private void seedExampleData() {
+        Restaurant daMarco = new Restaurant("Pizzeria Da Marco", "Kraków");
+        Restaurant kebabKing = new Restaurant("Kebab King", "Warszawa");
+        Restaurant sushiZen = new Restaurant("Sushi Zen", "Wrocław");
+        Restaurant podKogutem = new Restaurant("Bar Mleczny Pod Kogutem", "Kraków");
+        Restaurant bella = new Restaurant("Trattoria Bella", "Poznań");
+
+        Dish margherita = new Dish("Pizza Margherita", 32.00, daMarco);
+        Dish pepperoni = new Dish("Pizza Pepperoni", 34.00, daMarco);
+        Dish kebab = new Dish("Kebab w bułce XL", 25.00, kebabKing);
+        Dish falafel = new Dish("Falafel wrap", 22.00, kebabKing);
+        Dish california = new Dish("Zestaw California 12szt", 48.00, sushiZen);
+        Dish ramen = new Dish("Ramen Tonkotsu", 36.00, sushiZen);
+        Dish pierogi = new Dish("Pierogi ruskie", 18.00, podKogutem);
+        Dish carbonara = new Dish("Spaghetti Carbonara", 29.00, bella);
+
+        book.addRating(new Rating(margherita, 9, "Ciasto idealne, dowóz szybki"));
+        book.addRating(new Rating(margherita, 7, "Trochę mniej sera niż zwykle"));
+        book.addRating(new Rating(kebab, 8, "Sos czosnkowy petarda"));
+        book.addRating(new Rating(california, 10, "Najlepsze sushi w mieście"));
+        book.addRating(new Rating(pierogi, 9, "Jak u babci"));
+        book.addRating(new Rating(pierogi, 6, "Tym razem trochę przypalone"));
+        book.addRating(new Rating(ramen, 8, "Bulion gęsty i rozgrzewający"));
+        book.addRating(new Rating(falafel, 5, "Suchy, mało sosu"));
+        book.addRating(new Rating(pepperoni, 9, "Ostro i konkretnie"));
+        book.addRating(new Rating(carbonara, 7, "Smaczne, ale za słone"));
     }
 
     public void run() {
