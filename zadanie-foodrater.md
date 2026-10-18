@@ -12,8 +12,6 @@ Punkt wyjścia à la "Książulo" / "muala" — apka do oceniania jedzenia. Uży
 
 Zanim zaczniesz kodować, zobacz diagram poniżej — pokazuje, jak docelowe klasy mają się ze sobą łączyć (kto kogo tworzy, kto do kogo woła). Interaktywna wersja (działa też w dark mode) jest w `architektura-foodrater.html`.
 
-![Diagram architektury FoodRater](architektura-foodrater.png)
-
 ## Co ma robić program
 
 Konsolowe menu w pętli:
